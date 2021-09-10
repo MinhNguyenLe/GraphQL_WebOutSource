@@ -20,7 +20,7 @@
     "quill-emoji": "^0.2.0"
   },
   "scripts": {
-    "serve": "nodemon Server/server.js",
+    "serve": "nodemon server.js",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
