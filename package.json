@@ -1,0 +1,43 @@
+{
+  "name": "MariaDB-TrungTamTiengAnh",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cloudinary": "^1.25.1",
+    "concurrently": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.9",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "node-sass": "6.0.0",
+    "nodemon": "^2.0.7",
+    "nouislider": "15.1.0",
+    "quill-emoji": "^0.2.0"
+  },
+  "scripts": {
+    "serve": "nodemon Server/server.js",
+    "build": "react-scripts build && gulp licenses",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
