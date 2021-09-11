@@ -1,8 +1,15 @@
+require("dotenv").config();
+
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { resolvers } from "../data/resolvers.graphql";
 import { typeDefs } from "../data/schema.graphql";
-import { PORT } from "../config/config";
+
+const PORT = process.env.PORT || 404;
+
+// Connect to DB
+const db = require("../connectMongoDB");
+db.connect();
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
@@ -14,7 +21,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen({ port: PORT }, () => {
-  console.log(
-    `Server is running at http://localhost:8080${server.graphqlPath}`
-  );
+  console.log(`Server is running at ${PORT}`);
 });

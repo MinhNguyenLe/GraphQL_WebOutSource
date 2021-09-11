@@ -1,4 +1,4 @@
-import {Friends,Series} from '../db/dbConnector.js'
+import {Friends,Series} from '../connectMongoDB/schemaMongo'
 
 /**
 * GraphQL Resolvers 
