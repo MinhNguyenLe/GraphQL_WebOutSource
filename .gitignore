@@ -14,6 +14,9 @@ node_modules
 # production
 /build
 
+# diagram
+/ClassDiagram.drawio
+
 # misc
 # .DS_Store
 # .env.local
