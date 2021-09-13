@@ -1,4 +1,4 @@
-import { Users } from "../mongoDB/db";
+import * as db from "../mongoDB/db";
 
 /**
  * GraphQL Resolvers
@@ -8,11 +8,21 @@ export const resolvers = {
   Query: {
     users: () => {
       return new Promise((resolve, reject) => {
-        Users.find((err, users) => {
+        db.Users.find((err, users) => {
           if (err) reject(err);
           else resolve(users);
         });
       });
     },
+    admins: () => {
+      return new Promise((resolve, reject) => {
+        db.Admins.find((err, admins) => {
+          if (err) reject(err);
+          else resolve(admins);
+        });
+      });
+    },
+    test: () => "test",
   },
+  // Mutation: {},
 };
