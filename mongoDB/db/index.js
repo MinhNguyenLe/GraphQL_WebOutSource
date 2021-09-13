@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
 const { userSchema } = require("./Users.js");
-const { adminSchema } = require("./Users.js");
-const { buyerSchema } = require("./Users.js");
-const { domainSchema } = require("./Users.js");
-const { hostingSchema } = require("./Users.js");
-const { priceSchema } = require("./Users.js");
-const { productSchema } = require("./Users.js");
-const { projectSchema } = require("./Users.js");
-const { promotionSchema } = require("./Users.js");
-const { serverSchema } = require("./Users.js");
-const { sourcecodeSchema } = require("./Users.js");
-const { vpsSchema } = require("./Users.js");
-const { templateSchema } = require("./Users.js");
+const { adminSchema } = require("./Admins.js");
+const { buyerSchema } = require("./Buyers.js");
+const { domainSchema } = require("./Domains.js");
+const { hostingSchema } = require("./Hosting.js");
+const { priceSchema } = require("./Prices.js");
+const { productSchema } = require("./Products.js");
+const { projectSchema } = require("./Projects.js");
+const { promotionSchema } = require("./Promotions.js");
+const { serverSchema } = require("./Servers.js");
+const { sourcecodeSchema } = require("./SourceCode.js");
+const { vpsSchema } = require("./VPS.js");
+const { templateSchema } = require("./WebTemplate.js");
 
 const Users = mongoose.model("Users", userSchema);
 const Admins = mongoose.model("Admins", adminSchema);

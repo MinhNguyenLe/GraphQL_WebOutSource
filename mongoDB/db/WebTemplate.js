@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 exports.templateSchema = new mongoose.Schema(
   {
