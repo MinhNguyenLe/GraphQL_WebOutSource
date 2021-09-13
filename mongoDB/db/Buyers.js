@@ -10,6 +10,15 @@ exports.buyerSchema = new mongoose.Schema(
     typeBuyer: {
       type: Number,
     },
+    cart: {
+      type: [String],
+    },
+    nameCompany: {
+      type: String,
+    },
+    quantity: {
+      type: Number,
+    },
   },
   { timestamps: true, collection: "Buyers" }
 );
