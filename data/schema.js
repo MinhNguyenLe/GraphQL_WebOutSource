@@ -11,8 +11,8 @@ export const typeDefs = gql`
     isPermission: Boolean
     phone: String
     information: String
-    createdAt: String!
-    token: String!
+    createdAt: String
+    token: String
   }
 
   type Buyers {
@@ -27,7 +27,7 @@ export const typeDefs = gql`
     _id: ID!
     email: String!
     password: String!
-    fullName: String!
+    fullName: String
     userName: String!
     isPermission: Boolean!
     phone: String!
@@ -37,7 +37,7 @@ export const typeDefs = gql`
   input Register {
     email: String!
     password: String!
-    userName: String
+    userName: String!
   }
 
   input Login {

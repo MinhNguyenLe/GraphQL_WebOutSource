@@ -48,9 +48,11 @@ export const resolvers = {
     },
   },
   Mutation: {
-    async login(_, { login: { email, password } }) {
+    login: async (_, { login: { email, password } }) => {
       const { valid, errors } = validateLoginInput(email, password);
-
+      if (!valid) {
+        throw new UserInputError("Errors", { errors });
+      }
       const user = await db.Users.findOne({ email });
 
       if (!user) {
@@ -67,11 +69,10 @@ export const resolvers = {
 
       return {
         ...user._doc,
-        id: user._id,
         token,
       };
     },
-    async register(_, { register: { userName, email, password } }) {
+    register: async (_, { register: { userName, email, password } }) => {
       const { valid, errors } = validateRegisterInput(
         userName,
         email,
@@ -80,31 +81,34 @@ export const resolvers = {
       if (!valid) {
         throw new UserInputError("Errors", { errors });
       }
+      try {
+        const user = await db.Users.findOne({ userName });
+        if (user) {
+          throw new UserInputError("User name existed", {
+            errors: {
+              userName: "user name existed",
+            },
+          });
+        }
 
-      const user = await db.Users.findOne({ userName });
-      if (user) {
-        throw new UserInputError("User name existed", {
-          errors: {
-            userName: "user name existed",
-          },
+        password = await bcrypt.hash(password, 12);
+
+        const newUser = new db.Users({
+          email,
+          userName,
+          password,
         });
+
+        const res = await newUser.save();
+        console.log(res);
+        const token = generateToken(res);
+        return {
+          ...res._doc,
+          token,
+        };
+      } catch (err) {
+        console.log("Err server", err);
       }
-
-      password = await bcrypt.hash(password, 12);
-
-      const newUser = new db.Users({
-        email,
-        userName,
-        password,
-      });
-
-      const res = await newUser.save();
-
-      const token = generateToken(res);
-      return {
-        ...res._doc,
-        token,
-      };
     },
   },
 };
