@@ -5,24 +5,26 @@ export const typeDefs = gql`
     _id: ID!
     email: String!
     password: String!
-    job: String!
-    fullName: String!
+    job: String
+    fullName: String
     userName: String!
-    isPermission: Boolean!
-    phone: String!
-    information: String!
+    isPermission: Boolean
+    phone: String
+    information: String
     createdAt: String!
     token: String!
   }
 
   type Buyers {
-    idUser: [Users]
+    _id: ID!
+    # idUser: [Users]
     typeBuyer: Int!
     nameCompany: String!
     quantity: Int!
   }
 
   type Admins {
+    _id: ID!
     email: String!
     password: String!
     fullName: String!
@@ -32,11 +34,16 @@ export const typeDefs = gql`
     information: String!
   }
 
-  # input Register {
-  #   users: [Users]
-  #   admins: [Admins]
-  #   test: String!
-  # }
+  input Register {
+    email: String!
+    password: String!
+    userName: String
+  }
+
+  input Login {
+    email: String!
+    password: String!
+  }
 
   type Query {
     users: [Users]
@@ -44,9 +51,8 @@ export const typeDefs = gql`
     test: String!
   }
 
-  # type Mutation {
-  #   users: [Users]
-  #   admins: [Admins]
-  #   test: String!
-  # }
+  type Mutation {
+    register(register: Register): Users!
+    login(login: Login): Users!
+  }
 `;
