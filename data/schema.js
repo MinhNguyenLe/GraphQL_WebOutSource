@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   type Users {
-    _id: ID!
+    _id: ID
     email: String!
     password: String!
     job: String
@@ -13,14 +13,15 @@ export const typeDefs = gql`
     information: String
     createdAt: String
     token: String
+    buyer: [Buyers]
   }
 
   type Buyers {
     _id: ID!
-    # idUser: [Users]
-    typeBuyer: Int!
-    nameCompany: String!
-    quantity: Int!
+    user: Users!
+    typeBuyer: Int
+    nameCompany: String
+    quantity: Int
   }
 
   type Admins {
@@ -47,8 +48,7 @@ export const typeDefs = gql`
 
   type Query {
     users: [Users]
-    admins: [Admins]
-    test: String!
+    buyers: [Buyers]
   }
 
   type Mutation {

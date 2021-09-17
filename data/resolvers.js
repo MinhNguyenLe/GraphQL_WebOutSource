@@ -19,9 +19,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 function generateToken(user) {
   return jwt.sign(
     {
-      id: user.id,
-      email: user.email,
-      username: user.username,
+      id: user._id,
     },
     SECRET_KEY,
     { expiresIn: "1h" }
@@ -38,13 +36,26 @@ export const resolvers = {
         });
       });
     },
-    async admins() {
-      try {
-        const posts = await db.Users.find();
-        return posts;
-      } catch (err) {
-        throw new Error(err);
-      }
+    buyers: () => {
+      return new Promise((resolve, reject) => {
+        db.Buyers.find((err, users) => {
+          if (err) reject(err);
+          else resolve(users);
+        });
+      });
+    },
+  },
+  Buyers: {
+    user: async (buyer) => {
+      let user = [];
+      const data = await db.Buyers.find({}).populate("idUser");
+
+      data.filter((item) => {
+        if (item.idUser._id.toString() == buyer.idUser.toString()) {
+          user.push(item.idUser);
+        }
+      });
+      return user[0];
     },
   },
   Mutation: {
@@ -98,12 +109,17 @@ export const resolvers = {
           userName,
           password,
         });
+        const resUser = await newUser.save();
 
-        const res = await newUser.save();
-        console.log(res);
+        const newBuyer = new db.Buyers({
+          idUser: resUser._id,
+        });
+        const res = await newBuyer.save();
         const token = generateToken(res);
+        console.log(res);
         return {
-          ...res._doc,
+          ...resUser._doc,
+          // idBuyer: res._id,
           token,
         };
       } catch (err) {

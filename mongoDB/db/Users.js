@@ -27,9 +27,9 @@ exports.userSchema = new mongoose.Schema(
     information: {
       type: String,
     },
-    token: {
-      type: String,
-    },
+    // token: {
+    //   type: String,
+    // },
   },
   { timestamps: true, collection: "Users" }
 );
