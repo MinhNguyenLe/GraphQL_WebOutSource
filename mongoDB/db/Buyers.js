@@ -8,16 +8,19 @@ exports.buyerSchema = new mongoose.Schema(
       ref: "Users",
     },
     typeBuyer: {
-      type: Number,
+      type: Number, // 1 :team (small) 2 :business (lard)
     },
     cart: {
       type: [String],
+      default: [],
     },
-    nameCompany: {
+    name: {
       type: String,
+      default: "",
     },
     quantity: {
       type: Number,
+      default: 10,
     },
   },
   { timestamps: true, collection: "Buyers" }

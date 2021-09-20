@@ -11,17 +11,17 @@ export const typeDefs = gql`
     isPermission: Boolean
     phone: String
     information: String
-    createdAt: String
-    token: String
     buyer: [Buyers]
   }
 
   type Buyers {
+    token: String
     _id: ID!
     user: Users!
-    typeBuyer: Int
-    nameCompany: String
-    quantity: Int
+    typeBuyer: Int!
+    name: String!
+    createdAt: String
+    quantity: Int!
   }
 
   type Admins {
@@ -39,6 +39,8 @@ export const typeDefs = gql`
     email: String!
     password: String!
     userName: String!
+    name: String!
+    quantity: Int!
   }
 
   input Login {
@@ -52,7 +54,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    register(register: Register): Users!
+    register(register: Register): Buyers!
     login(login: Login): Users!
   }
 `;

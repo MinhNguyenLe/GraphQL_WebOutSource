@@ -20,6 +20,7 @@ function generateToken(user) {
   return jwt.sign(
     {
       id: user._id,
+      isPermission: user.isPermission,
     },
     SECRET_KEY,
     { expiresIn: "1h" }
@@ -83,11 +84,16 @@ export const resolvers = {
         token,
       };
     },
-    register: async (_, { register: { userName, email, password } }) => {
+    register: async (
+      _,
+      { register: { userName, email, password, quantity, name } }
+    ) => {
       const { valid, errors } = validateRegisterInput(
         userName,
         email,
-        password
+        password,
+        quantity,
+        name
       );
       if (!valid) {
         throw new UserInputError("Errors", { errors });
@@ -113,13 +119,15 @@ export const resolvers = {
 
         const newBuyer = new db.Buyers({
           idUser: resUser._id,
+          name: name,
+          quantity: quantity,
+          typeBuyer: quantity < 11 ? 1 : 2,
         });
         const res = await newBuyer.save();
-        const token = generateToken(res);
+        const token = generateToken(resUser);
         console.log(res);
         return {
-          ...resUser._doc,
-          // idBuyer: res._id,
+          ...res._doc,
           token,
         };
       } catch (err) {

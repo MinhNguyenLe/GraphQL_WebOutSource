@@ -11,25 +11,27 @@ exports.userSchema = new mongoose.Schema(
     },
     job: {
       type: String,
+      default: "",
     },
     fullName: {
       type: String,
+      default: "",
     },
     userName: {
       type: String,
     },
     isPermission: {
       type: Boolean,
+      default: false,
     },
     phone: {
       type: String,
+      default: "",
     },
     information: {
       type: String,
+      default: "",
     },
-    // token: {
-    //   type: String,
-    // },
   },
   { timestamps: true, collection: "Users" }
 );
