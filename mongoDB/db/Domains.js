@@ -16,6 +16,14 @@ exports.domainSchema = new mongoose.Schema(
     dot: {
       type: String,
     },
+    information: {
+      type: String,
+      default: "",
+    },
+    images: {
+      type: [String],
+      default: [],
+    },
   },
   { timestamps: true, collection: "Domains" }
 );
