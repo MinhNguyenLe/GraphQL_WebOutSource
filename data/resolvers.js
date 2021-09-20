@@ -78,11 +78,15 @@ export const resolvers = {
         throw new UserInputError("Password incorrect", { errors });
       }
       const token = generateToken(user);
-
-      return {
-        ...user._doc,
-        token,
-      };
+      console.log(user);
+      if (!user.isPermission) {
+        const buyer = await db.Buyers.findOne({ idUser: user._id });
+        console.log(buyer);
+        return {
+          ...buyer._doc,
+          token,
+        };
+      }
     },
     register: async (
       _,
@@ -116,6 +120,15 @@ export const resolvers = {
           password,
         });
         const resUser = await newUser.save();
+
+        const buyer = await db.Buyers.findOne({ name });
+        if (buyer) {
+          throw new UserInputError("Name existed", {
+            errors: {
+              userName: "Name existed",
+            },
+          });
+        }
 
         const newBuyer = new db.Buyers({
           idUser: resUser._id,

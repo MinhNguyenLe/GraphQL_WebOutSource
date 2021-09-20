@@ -55,6 +55,6 @@ export const typeDefs = gql`
 
   type Mutation {
     register(register: Register): Buyers!
-    login(login: Login): Users!
+    login(login: Login): Buyers!
   }
 `;
