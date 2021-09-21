@@ -45,6 +45,30 @@ export const resolvers = {
         });
       });
     },
+    domains: () => {
+      return new Promise((resolve, reject) => {
+        db.Domains.find((err, domain) => {
+          if (err) reject(err);
+          else {
+            console.log(domain);
+            resolve(domain);
+          }
+        });
+      });
+    },
+  },
+  Domains: {
+    product: async (domain) => {
+      let products = [];
+      const data = await db.Domains.find({}).populate("idProduct");
+
+      data.filter((item) => {
+        if (item.idProduct._id.toString() == domain.idProduct.toString()) {
+          products.push(item.idProduct);
+        }
+      });
+      return products[0];
+    },
   },
   Buyers: {
     user: async (buyer) => {
@@ -60,6 +84,41 @@ export const resolvers = {
     },
   },
   Mutation: {
+    createDomain: async (
+      _,
+      { createDomain: { price, information, images, months, dot } }
+    ) => {
+      try {
+        const domain = await db.Domains.findOne({ dot });
+        if (domain) {
+          throw new UserInputError("Domain was created", {
+            errors: {
+              userName: "Domain was created",
+            },
+          });
+        }
+
+        const newProduct = new db.Products({
+          months,
+          price,
+        });
+        const resProduct = await newProduct.save();
+
+        const newDomain = new db.Domains({
+          dot,
+          information,
+          images: [images],
+          idProduct: resProduct._id,
+        });
+        const resDomain = await newDomain.save();
+        console.log(resDomain);
+        return {
+          ...resDomain._doc,
+        };
+      } catch (err) {
+        console.log("Err server", err);
+      }
+    },
     login: async (_, { login: { email, password } }) => {
       const { valid, errors } = validateLoginInput(email, password);
       if (!valid) {
@@ -118,6 +177,7 @@ export const resolvers = {
           email,
           userName,
           password,
+          // isPermission: true,
         });
         const resUser = await newUser.save();
 
