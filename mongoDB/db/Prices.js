@@ -7,11 +7,16 @@ exports.priceSchema = new mongoose.Schema(
       type: String,
     },
     type: {
-      type: String,
+      type: Number,
+      default: 1, //1:plus
     },
     price: {
       type: Number,
     },
+    // currency: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "Currency",
+    // },
     product: {
       type: Schema.Types.ObjectId,
       ref: "Products",
