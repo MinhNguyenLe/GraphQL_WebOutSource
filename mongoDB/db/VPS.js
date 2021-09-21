@@ -5,22 +5,27 @@ exports.vpsSchema = new mongoose.Schema(
   {
     cloudStorage: {
       type: String,
+      default: "",
     },
     CPU: {
       type: String,
+      default: "",
     },
     bandwidth: {
       type: String,
+      default: "",
     },
-    product: {
+    idProduct: {
       type: Schema.Types.ObjectId,
       ref: "Products",
     },
     RAM: {
       type: String,
+      default: "",
     },
-    typeVPS: {
+    type: {
       type: String,
+      default: "",
     },
   },
   { timestamps: true, collection: "VPS" }

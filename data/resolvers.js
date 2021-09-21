@@ -50,11 +50,79 @@ export const resolvers = {
         db.Domains.find((err, domain) => {
           if (err) reject(err);
           else {
-            console.log(domain);
             resolve(domain);
           }
         });
       });
+    },
+    hosting: () => {
+      return new Promise((resolve, reject) => {
+        db.Hosting.find((err, hosting) => {
+          if (err) reject(err);
+          else {
+            resolve(hosting);
+          }
+        });
+      });
+    },
+    vps: () => {
+      return new Promise((resolve, reject) => {
+        db.VPS.find((err, vps) => {
+          if (err) reject(err);
+          else {
+            resolve(vps);
+          }
+        });
+      });
+    },
+    servers: () => {
+      return new Promise((resolve, reject) => {
+        db.Servers.find((err, server) => {
+          if (err) reject(err);
+          else {
+            resolve(server);
+          }
+        });
+      });
+    },
+  },
+  VPS: {
+    product: async (vps) => {
+      let products = [];
+      const data = await db.VPS.find({}).populate("idProduct");
+
+      data.filter((item) => {
+        if (item.idProduct._id.toString() == vps.idProduct.toString()) {
+          products.push(item.idProduct);
+        }
+      });
+      return products[0];
+    },
+  },
+  Servers: {
+    product: async (server) => {
+      let products = [];
+      const data = await db.Servers.find({}).populate("idProduct");
+
+      data.filter((item) => {
+        if (item.idProduct._id.toString() == server.idProduct.toString()) {
+          products.push(item.idProduct);
+        }
+      });
+      return products[0];
+    },
+  },
+  Hosting: {
+    product: async (hosting) => {
+      let products = [];
+      const data = await db.Hosting.find({}).populate("idProduct");
+
+      data.filter((item) => {
+        if (item.idProduct._id.toString() == hosting.idProduct.toString()) {
+          products.push(item.idProduct);
+        }
+      });
+      return products[0];
     },
   },
   Domains: {
@@ -84,6 +152,116 @@ export const resolvers = {
     },
   },
   Mutation: {
+    createServer: async (
+      _,
+      { createServer: { months, price, CPU, HDD, type, RAM, bandwidth } }
+    ) => {
+      try {
+        const server = await db.Servers.findOne({ type });
+        if (server) {
+          throw new UserInputError("Type server was created", {
+            errors: {
+              userName: "Type server was created",
+            },
+          });
+        }
+
+        const newProduct = new db.Products({
+          months,
+          price,
+        });
+        const resProduct = await newProduct.save();
+
+        const newServer = new db.Servers({
+          CPU,
+          HDD,
+          type,
+          RAM,
+          bandwidth,
+          idProduct: resProduct._id,
+        });
+        const resServer = await newServer.save();
+        console.log(resServer);
+        return {
+          ...resServer._doc,
+        };
+      } catch (err) {
+        console.log("Err server", err);
+      }
+    },
+    createVPS: async (
+      _,
+      { createVPS: { months, price, CPU, cloudStorage, type, RAM, bandwidth } }
+    ) => {
+      try {
+        const vps = await db.VPS.findOne({ type });
+        if (vps) {
+          throw new UserInputError("Type vps was created", {
+            errors: {
+              userName: "Type vps was created",
+            },
+          });
+        }
+
+        const newProduct = new db.Products({
+          months,
+          price,
+        });
+        const resProduct = await newProduct.save();
+
+        const newVPS = new db.VPS({
+          CPU,
+          cloudStorage,
+          type,
+          RAM,
+          bandwidth,
+          idProduct: resProduct._id,
+        });
+        const resVPS = await newVPS.save();
+        console.log(resVPS);
+        return {
+          ...resVPS._doc,
+        };
+      } catch (err) {
+        console.log("Err server", err);
+      }
+    },
+    createHosting: async (
+      _,
+      { createHosting: { months, price, SSDMemory, type, RAM, bandwidth } }
+    ) => {
+      try {
+        const hosting = await db.Hosting.findOne({ type });
+        if (hosting) {
+          throw new UserInputError("Type hosting was created", {
+            errors: {
+              userName: "Type hosting was created",
+            },
+          });
+        }
+
+        const newProduct = new db.Products({
+          months,
+          price,
+        });
+        const resProduct = await newProduct.save();
+
+        const newHosting = new db.Hosting({
+          SSDMemory,
+          type,
+          RAM,
+          bandwidth,
+          idProduct: resProduct._id,
+        });
+        const resHosting = await newHosting.save();
+        console.log(resHosting);
+        return {
+          ...resHosting._doc,
+        };
+      } catch (err) {
+        console.log("Err server", err);
+      }
+    },
     createDomain: async (
       _,
       { createDomain: { price, information, images, months, dot } }

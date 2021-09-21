@@ -9,15 +9,23 @@ exports.hostingSchema = new mongoose.Schema(
     },
     SSDMemory: {
       type: String,
+      default: "",
     },
-    typeHosting: {
-      type: Number,
+    type: {
+      type: String,
+      default: "basic", //"pro" "super"
     },
     RAM: {
       type: String,
+      default: "",
     },
     bandwidth: {
       type: String,
+      default: "",
+    },
+    isFreeDomain: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true, collection: "Hosting" }
