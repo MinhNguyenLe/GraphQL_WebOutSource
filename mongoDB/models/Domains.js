@@ -7,12 +7,6 @@ exports.domainSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Products",
     },
-    // nameUrl: {
-    //   type: String,
-    // },
-    // userDomain: {
-    //   type: String,
-    // },
     dot: {
       type: String,
       default: ".com",

@@ -10,10 +10,6 @@ exports.buyerSchema = new mongoose.Schema(
     typeBuyer: {
       type: Number, // 1 :team (small) 2 :business (lard)
     },
-    cart: {
-      type: [String],
-      default: [],
-    },
     name: {
       type: String,
       default: "",

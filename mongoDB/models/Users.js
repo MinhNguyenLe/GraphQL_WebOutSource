@@ -32,6 +32,9 @@ exports.userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    listIdProduct: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Products" }],
+    },
   },
   { timestamps: true, collection: "Users" }
 );

@@ -11,7 +11,8 @@ export const typeDefs = gql`
     isPermission: Boolean
     phone: String
     information: String
-    buyer: [Buyers]
+    # buyer: [Buyers]
+    listIdProduct: [UserProduct]
   }
 
   type Buyers {
@@ -38,6 +39,22 @@ export const typeDefs = gql`
     months: Int!
     idPromotion: Promotions
     createdAt: String
+  }
+
+  type UserProduct {
+    _id: ID!
+    price: Float!
+    months: Int!
+    user: Users!
+    idPromotion: Promotions
+    createdAt: String
+  }
+
+  type UserDomain {
+    _id: ID!
+    dot: String!
+    nameUrl: String!
+    userProduct: UserProduct!
   }
 
   type Domains {

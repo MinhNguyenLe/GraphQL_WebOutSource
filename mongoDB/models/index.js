@@ -13,6 +13,11 @@ const { serverSchema } = require("./Servers.js");
 const { sourcecodeSchema } = require("./SourceCode.js");
 const { vpsSchema } = require("./VPS.js");
 const { templateSchema } = require("./WebTemplate.js");
+const { userDomain } = require("./UserDomain.js");
+const { userProduct } = require("./UserProduct.js");
+
+const UserDomain = mongoose.model("UserDomain", userDomain);
+const UserProduct = mongoose.model("UserProduct", userProduct);
 
 const Users = mongoose.model("Users", userSchema);
 const Admins = mongoose.model("Admins", adminSchema);
@@ -42,4 +47,6 @@ export {
   SourceCode,
   VPS,
   WebTemplate,
+  UserDomain,
+  UserProduct,
 };
