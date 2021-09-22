@@ -30,6 +30,7 @@ const userProduct = {
     { createUserDomain: { domain, user, product, nameUrl } }
   ) => {
     try {
+      if (!domain || !user || !product || !nameUrl) console.log("No input");
       const dataUser = await models.Users.findById(user);
       const dataDomain = await models.Domains.findById(domain);
       const dataProduct = await models.Products.findById(product);
