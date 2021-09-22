@@ -14,8 +14,14 @@ const { sourcecodeSchema } = require("./SourceCode.js");
 const { vpsSchema } = require("./VPS.js");
 const { templateSchema } = require("./WebTemplate.js");
 const { userDomain } = require("./UserDomain.js");
+const { userVPS } = require("./UserVPS.js");
+const { userServer } = require("./UserServer.js");
+const { userHosting } = require("./UserHosting.js");
 const { userProduct } = require("./UserProduct.js");
 
+const UserVPS = mongoose.model("UserVPS", userVPS);
+const UserServer = mongoose.model("UserServer", userServer);
+const UserHosting = mongoose.model("UserHosting", userHosting);
 const UserDomain = mongoose.model("UserDomain", userDomain);
 const UserProduct = mongoose.model("UserProduct", userProduct);
 
@@ -49,4 +55,7 @@ export {
   WebTemplate,
   UserDomain,
   UserProduct,
+  UserHosting,
+  UserServer,
+  UserVPS,
 };

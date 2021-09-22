@@ -33,7 +33,7 @@ exports.userSchema = new mongoose.Schema(
       default: "",
     },
     listIdProduct: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Products" }],
+      type: [{ type: Schema.Types.ObjectId, ref: "UserProduct" }],
     },
   },
   { timestamps: true, collection: "Users" }

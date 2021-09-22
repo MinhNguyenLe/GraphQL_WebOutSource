@@ -3,17 +3,13 @@ const Schema = mongoose.Schema;
 
 exports.userDomain = new mongoose.Schema(
   {
-    idProduct: {
+    idUserProduct: {
       type: Schema.Types.ObjectId,
-      ref: "Products",
+      ref: "UserProduct",
     },
     nameUrl: {
       type: String,
       default: "example",
-    },
-    idUser: {
-      type: Schema.Types.ObjectId,
-      ref: "Users",
     },
     dot: {
       type: String,

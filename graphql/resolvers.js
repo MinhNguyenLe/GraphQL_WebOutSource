@@ -8,6 +8,12 @@ export const resolvers = {
     hosting: controller.product.hosting,
     vps: controller.product.vps,
     servers: controller.product.servers,
+    userDomain: controller.userProduct.userDomain,
+  },
+  UserDomain: {
+    userProduct: async (userDomain) => {
+      return controller.userProduct.userProduct(userDomain);
+    },
   },
   VPS: {
     product: async (vps) => {
@@ -41,5 +47,6 @@ export const resolvers = {
     createDomain: controller.product.createDomain,
     login: controller.user.login,
     register: controller.user.register,
+    createUserDomain: controller.userProduct.createUserDomain,
   },
 };
