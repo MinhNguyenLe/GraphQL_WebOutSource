@@ -81,6 +81,13 @@ const user = {
         token,
       };
     }
+    //cheat
+    const buyer = await models.Buyers.findOne({ idUser: user._id });
+    console.log(buyer);
+    return {
+      ...buyer._doc,
+      token,
+    };
   },
   register: async (
     _,
