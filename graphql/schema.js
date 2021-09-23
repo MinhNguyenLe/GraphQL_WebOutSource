@@ -20,6 +20,7 @@ export const typeDefs = gql`
     _id: ID!
     user: Users!
     typeBuyer: Int!
+    listIdProduct: [UserProduct]
     name: String!
     createdAt: String
     quantity: Int!
@@ -133,6 +134,7 @@ export const typeDefs = gql`
     user: Users!
     idPromotion: Promotions
     createdAt: String
+    type: String!
   }
 
   type UserDomain {
@@ -149,12 +151,28 @@ export const typeDefs = gql`
     nameUrl: String!
   }
 
+  input BuyDomain {
+    nameUrl: String!
+    domain: ID!
+  }
+
+  input BuyHosting {
+    hosting: ID!
+  }
+
+  # input BuyAllProduct {
+  #   domain: [BuyDomain]!
+  #   user: ID!
+  #   hosting: [BuyHosting!]
+  # }
+
   input Login {
     email: String!
     password: String!
   }
 
   type Query {
+    removeDataInDB: Message!
     users: [Users]
     buyers: [Buyers]
     domains: [Domains]
@@ -163,7 +181,9 @@ export const typeDefs = gql`
     servers: [Servers]
     userDomain: [UserDomain]
   }
-
+  type Message {
+    mess: String!
+  }
   type Mutation {
     register(register: Register): Buyers!
     login(login: Login): Buyers!
@@ -172,5 +192,10 @@ export const typeDefs = gql`
     createVPS(createVPS: CreateVPS): VPS!
     createServer(createServer: CreateServer): Servers!
     createUserDomain(createUserDomain: CreateUserDomain): UserDomain!
+    buyAllProduct(
+      user: ID!
+      domain: [BuyDomain]
+      hosting: [BuyHosting]
+    ): Buyers!
   }
 `;

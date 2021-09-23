@@ -13,6 +13,10 @@ exports.userProduct = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Promotions",
     },
+    type: {
+      type: String,
+      default: "",
+    },
     idUser: {
       type: Schema.Types.ObjectId,
       ref: "Users",

@@ -2,6 +2,7 @@ import controller from "../mongoDB/controller";
 
 export const resolvers = {
   Query: {
+    removeDataInDB: controller.userProduct.cleanAllDB,
     users: controller.user.users,
     buyers: controller.user.buyers,
     domains: controller.product.domains,
@@ -48,5 +49,6 @@ export const resolvers = {
     login: controller.user.login,
     register: controller.user.register,
     createUserDomain: controller.userProduct.createUserDomain,
+    buyAllProduct: controller.userProduct.buyAllProduct,
   },
 };
