@@ -35,13 +35,8 @@ const user = {
       });
     });
   },
-  users: () => {
-    return new Promise((resolve, reject) => {
-      models.Users.find((err, users) => {
-        if (err) reject(err);
-        else resolve(users);
-      });
-    });
+  users: async () => {
+    return models.Users.find().populate("listIdProduct");
   },
   userAsBuyer: async (buyer) => {
     let user = [];
