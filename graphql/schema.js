@@ -57,6 +57,7 @@ export const typeDefs = gql`
     RAM: String!
     product: Products!
     bandwidth: String!
+    information: String!
     createdAt: String
   }
 
@@ -97,6 +98,7 @@ export const typeDefs = gql`
     bandwidth: String!
     price: Float!
     months: Int!
+    information: String!
   }
   input CreateVPS {
     cloudStorage: String!

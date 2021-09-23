@@ -162,7 +162,17 @@ const product = {
   },
   createHosting: async (
     _,
-    { createHosting: { months, price, SSDMemory, type, RAM, bandwidth } }
+    {
+      createHosting: {
+        information,
+        months,
+        price,
+        SSDMemory,
+        type,
+        RAM,
+        bandwidth,
+      },
+    }
   ) => {
     try {
       const hosting = await models.Hosting.findOne({ type });
@@ -184,6 +194,7 @@ const product = {
         SSDMemory,
         type,
         RAM,
+        information,
         bandwidth,
         idProduct: resProduct._id,
       });

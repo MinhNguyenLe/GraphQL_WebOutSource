@@ -23,6 +23,10 @@ exports.hostingSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    information: {
+      type: String,
+      default: "",
+    },
     isFreeDomain: {
       type: Boolean,
       default: false,
