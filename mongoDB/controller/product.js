@@ -3,6 +3,10 @@ import * as models from "../models";
 const { UserInputError } = require("apollo-server");
 
 const product = {
+  deleteHosting: async (_, { deleteHosting: { _id } }) => {
+    await models.Hosting.deleteOne({ _id });
+    return { mess: "delete success" };
+  },
   domains: () => {
     return new Promise((resolve, reject) => {
       models.Domains.find((err, domain) => {

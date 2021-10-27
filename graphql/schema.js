@@ -101,6 +101,11 @@ export const typeDefs = gql`
     months: Int!
     information: String!
   }
+
+  input Delete {
+    _id: String!
+  }
+
   input CreateVPS {
     cloudStorage: String!
     type: String!
@@ -189,6 +194,7 @@ export const typeDefs = gql`
     login(login: Login): Buyers!
     createDomain(createDomain: CreateDomain): Domains!
     createHosting(createHosting: CreateHosting): Hosting!
+    deleteHosting(deleteHosting: Delete): Message!
     createVPS(createVPS: CreateVPS): VPS!
     createServer(createServer: CreateServer): Servers!
     createUserDomain(createUserDomain: CreateUserDomain): UserDomain!
