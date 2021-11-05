@@ -51,5 +51,6 @@ export const resolvers = {
     createUserDomain: controller.userProduct.createUserDomain,
     buyAllProduct: controller.userProduct.buyAllProduct,
     deleteHosting: controller.product.deleteHosting,
+    editHosting: controller.product.editHosting,
   },
 };

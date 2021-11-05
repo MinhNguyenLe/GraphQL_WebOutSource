@@ -110,6 +110,21 @@ export const typeDefs = gql`
     information: String!
   }
 
+  input EditHosting {
+    _id: ID!
+    name: String!
+    domain: String!
+    website: String!
+    support: [String]!
+    SSDMemory: String!
+    type: String!
+    RAM: String!
+    bandwidth: String!
+    price: Float!
+    months: Int!
+    information: String!
+  }
+
   input Delete {
     _id: String!
   }
@@ -202,6 +217,7 @@ export const typeDefs = gql`
     login(login: Login): Buyers!
     createDomain(createDomain: CreateDomain): Domains!
     createHosting(createHosting: CreateHosting): Hosting!
+    editHosting(editHosting: EditHosting): Hosting!
     deleteHosting(deleteHosting: Delete): Message!
     createVPS(createVPS: CreateVPS): VPS!
     createServer(createServer: CreateServer): Servers!

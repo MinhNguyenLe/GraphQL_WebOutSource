@@ -254,6 +254,57 @@ const product = {
       console.log("Err server", err);
     }
   },
+  editHosting: async (
+    _,
+    {
+      editHosting: {
+        _id,
+        name,
+        domain,
+        website,
+        support,
+        information,
+        months,
+        price,
+        SSDMemory,
+        type,
+        RAM,
+        bandwidth,
+      },
+    }
+  ) => {
+    try {
+      const result = await models.Hosting.findOne({ _id });
+      const hosting = await models.Hosting.findOneAndUpdate(
+        { _id },
+        {
+          name,
+          domain,
+          website,
+          support,
+          SSDMemory,
+          type,
+          RAM,
+          information,
+          bandwidth,
+        }
+      ).populate("idProduct");
+      const product = await models.Products.findOneAndUpdate(
+        { _id: hosting.idProduct._id },
+        {
+          months,
+          price,
+        }
+      );
+
+      console.log(hosting, product);
+      return {
+        ...result._doc,
+      };
+    } catch (err) {
+      console.log("Err server", err);
+    }
+  },
 };
 
 module.exports = product;
