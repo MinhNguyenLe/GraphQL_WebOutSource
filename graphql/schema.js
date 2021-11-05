@@ -53,6 +53,10 @@ export const typeDefs = gql`
 
   type Hosting {
     _id: ID!
+    name: String!
+    domain: String!
+    website: String!
+    support: [String]!
     SSDMemory: String!
     type: String!
     RAM: String!
@@ -93,6 +97,10 @@ export const typeDefs = gql`
   }
 
   input CreateHosting {
+    name: String!
+    domain: String!
+    website: String!
+    support: [String]!
     SSDMemory: String!
     type: String!
     RAM: String!

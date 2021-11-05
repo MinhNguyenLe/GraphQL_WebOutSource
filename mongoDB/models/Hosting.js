@@ -19,7 +19,7 @@ exports.hostingSchema = new mongoose.Schema(
       type: String,
       default: "basic", //"pro" "super"
     },
-    freeDomain: {
+    domain: {
       type: String,
       default: "",
     },

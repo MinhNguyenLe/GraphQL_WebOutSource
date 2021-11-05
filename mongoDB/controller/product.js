@@ -168,6 +168,10 @@ const product = {
     _,
     {
       createHosting: {
+        name,
+        domain,
+        website,
+        support,
         information,
         months,
         price,
@@ -195,6 +199,10 @@ const product = {
       const resProduct = await newProduct.save();
 
       const newHosting = new models.Hosting({
+        name,
+        domain,
+        website,
+        support,
         SSDMemory,
         type,
         RAM,
