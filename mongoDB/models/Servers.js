@@ -3,7 +3,35 @@ const Schema = mongoose.Schema;
 
 exports.serverSchema = new mongoose.Schema(
   {
+    idProduct: {
+      type: Schema.Types.ObjectId,
+      ref: "Products",
+    },
+    type: {
+      type: String,
+      default: "",
+    },
+    name: {
+      type: String,
+      default: "",
+    },
+    information: {
+      type: String,
+      default: "",
+    },
+    support: {
+      type: [String],
+      default: [],
+    },
+    CPU: {
+      type: String,
+      default: "",
+    },
     HDD: {
+      type: String,
+      default: "",
+    },
+    SDD: {
       type: String,
       default: "",
     },
@@ -15,15 +43,7 @@ exports.serverSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    idProduct: {
-      type: Schema.Types.ObjectId,
-      ref: "Products",
-    },
-    CPU: {
-      type: String,
-      default: "",
-    },
-    type: {
+    timeSetup: {
       type: String,
       default: "",
     },

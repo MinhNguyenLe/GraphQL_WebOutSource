@@ -3,7 +3,31 @@ const Schema = mongoose.Schema;
 
 exports.vpsSchema = new mongoose.Schema(
   {
+    idProduct: {
+      type: Schema.Types.ObjectId,
+      ref: "Products",
+    },
+    type: {
+      type: String,
+      default: "",
+    },
+    name: {
+      type: String,
+      default: "",
+    },
+    information: {
+      type: String,
+      default: "",
+    },
+    support: {
+      type: [String],
+      default: [],
+    },
     cloudStorage: {
+      type: String,
+      default: "",
+    },
+    RAM: {
       type: String,
       default: "",
     },
@@ -12,18 +36,6 @@ exports.vpsSchema = new mongoose.Schema(
       default: "",
     },
     bandwidth: {
-      type: String,
-      default: "",
-    },
-    idProduct: {
-      type: Schema.Types.ObjectId,
-      ref: "Products",
-    },
-    RAM: {
-      type: String,
-      default: "",
-    },
-    type: {
       type: String,
       default: "",
     },

@@ -7,13 +7,33 @@ exports.hostingSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Products",
     },
-    SSDMemory: {
+    information: {
+      type: String,
+      default: "",
+    },
+    name: {
       type: String,
       default: "",
     },
     type: {
       type: String,
       default: "basic", //"pro" "super"
+    },
+    freeDomain: {
+      type: String,
+      default: "",
+    },
+    website: {
+      type: String,
+      default: "",
+    },
+    support: {
+      type: [String],
+      default: [],
+    },
+    SSDMemory: {
+      type: String,
+      default: "",
     },
     RAM: {
       type: String,
@@ -22,14 +42,6 @@ exports.hostingSchema = new mongoose.Schema(
     bandwidth: {
       type: String,
       default: "",
-    },
-    information: {
-      type: String,
-      default: "",
-    },
-    isFreeDomain: {
-      type: Boolean,
-      default: false,
     },
   },
   { timestamps: true, collection: "Hosting" }
