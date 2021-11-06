@@ -126,7 +126,7 @@ export const typeDefs = gql`
   }
 
   input Delete {
-    _id: String!
+    _id: ID!
   }
 
   input CreateVPS {
