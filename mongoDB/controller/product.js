@@ -5,7 +5,7 @@ const { UserInputError } = require("apollo-server");
 const product = {
   deleteHosting: async (_, { deleteHosting: { _id } }) => {
     await models.Hosting.deleteOne({ _id });
-    return { mess: "delete success" };
+    return models.Hosting.find();
   },
   domains: () => {
     return new Promise((resolve, reject) => {
@@ -212,9 +212,7 @@ const product = {
       });
       const resHosting = await newHosting.save();
       console.log(resHosting);
-      return {
-        ...resHosting._doc,
-      };
+      return models.Hosting.find();
     } catch (err) {
       console.log("Err server", err);
     }
@@ -274,7 +272,6 @@ const product = {
     }
   ) => {
     try {
-      const result = await models.Hosting.findOne({ _id });
       const hosting = await models.Hosting.findOneAndUpdate(
         { _id },
         {
@@ -296,11 +293,7 @@ const product = {
           price,
         }
       );
-
-      console.log(hosting, product);
-      return {
-        ...result._doc,
-      };
+      return models.Hosting.find();
     } catch (err) {
       console.log("Err server", err);
     }

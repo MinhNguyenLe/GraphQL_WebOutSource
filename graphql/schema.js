@@ -216,9 +216,9 @@ export const typeDefs = gql`
     register(register: Register): Buyers!
     login(login: Login): Buyers!
     createDomain(createDomain: CreateDomain): Domains!
-    createHosting(createHosting: CreateHosting): Hosting!
-    editHosting(editHosting: EditHosting): Hosting!
-    deleteHosting(deleteHosting: Delete): Message!
+    createHosting(createHosting: CreateHosting): [Hosting]!
+    editHosting(editHosting: EditHosting): [Hosting]!
+    deleteHosting(deleteHosting: Delete): [Hosting]!
     createVPS(createVPS: CreateVPS): VPS!
     createServer(createServer: CreateServer): Servers!
     createUserDomain(createUserDomain: CreateUserDomain): UserDomain!
