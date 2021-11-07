@@ -39,6 +39,10 @@ exports.vpsSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    domain: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true, collection: "VPS" }
 );

@@ -52,5 +52,7 @@ export const resolvers = {
     buyAllProduct: controller.userProduct.buyAllProduct,
     deleteHosting: controller.product.deleteHosting,
     editHosting: controller.product.editHosting,
+    editVPS: controller.product.editVPS,
+    deleteVPS: controller.product.deleteVPS,
   },
 };

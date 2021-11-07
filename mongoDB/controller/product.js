@@ -7,6 +7,10 @@ const product = {
     await models.Hosting.deleteOne({ _id });
     return models.Hosting.find();
   },
+  deleteVPS: async (_, { deleteVPS: { _id } }) => {
+    await models.VPS.deleteOne({ _id });
+    return models.VPS.find();
+  },
   domains: () => {
     return new Promise((resolve, reject) => {
       models.Domains.find((err, domain) => {
@@ -129,7 +133,21 @@ const product = {
   },
   createVPS: async (
     _,
-    { createVPS: { months, price, CPU, cloudStorage, type, RAM, bandwidth } }
+    {
+      createVPS: {
+        name,
+        domain,
+        support,
+        information,
+        months,
+        price,
+        CPU,
+        cloudStorage,
+        type,
+        RAM,
+        bandwidth,
+      },
+    }
   ) => {
     try {
       const vps = await models.VPS.findOne({ type });
@@ -148,6 +166,10 @@ const product = {
       const resProduct = await newProduct.save();
 
       const newVPS = new models.VPS({
+        name,
+        information,
+        domain,
+        support,
         CPU,
         cloudStorage,
         type,
@@ -155,11 +177,8 @@ const product = {
         bandwidth,
         idProduct: resProduct._id,
       });
-      const resVPS = await newVPS.save();
-      console.log(resVPS);
-      return {
-        ...resVPS._doc,
-      };
+      await newVPS.save();
+      return models.VPS.find();
     } catch (err) {
       console.log("Err server", err);
     }
@@ -294,6 +313,52 @@ const product = {
         }
       );
       return models.Hosting.find();
+    } catch (err) {
+      console.log("Err server", err);
+    }
+  },
+  editVPS: async (
+    _,
+    {
+      editVPS: {
+        _id,
+        name,
+        domain,
+        CPU,
+        support,
+        information,
+        months,
+        price,
+        cloudStorage,
+        type,
+        RAM,
+        bandwidth,
+      },
+    }
+  ) => {
+    try {
+      const vps = await models.VPS.findOneAndUpdate(
+        { _id },
+        {
+          name,
+          domain,
+          CPU,
+          support,
+          cloudStorage,
+          type,
+          RAM,
+          information,
+          bandwidth,
+        }
+      ).populate("idProduct");
+      const product = await models.Products.findOneAndUpdate(
+        { _id: vps.idProduct._id },
+        {
+          months,
+          price,
+        }
+      );
+      return models.VPS.find();
     } catch (err) {
       console.log("Err server", err);
     }
