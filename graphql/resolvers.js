@@ -54,5 +54,7 @@ export const resolvers = {
     editHosting: controller.product.editHosting,
     editVPS: controller.product.editVPS,
     deleteVPS: controller.product.deleteVPS,
+    editServer: controller.product.editServer,
+    deleteServer: controller.product.deleteServer,
   },
 };

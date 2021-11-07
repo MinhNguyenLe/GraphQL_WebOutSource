@@ -31,7 +31,7 @@ exports.serverSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    SDD: {
+    SSD: {
       type: String,
       default: "",
     },

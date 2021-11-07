@@ -11,6 +11,10 @@ const product = {
     await models.VPS.deleteOne({ _id });
     return models.VPS.find();
   },
+  deleteServer: async (_, { deleteServer: { _id } }) => {
+    await models.Servers.deleteOne({ _id });
+    return models.Servers.find();
+  },
   domains: () => {
     return new Promise((resolve, reject) => {
       models.Domains.find((err, domain) => {
@@ -96,7 +100,22 @@ const product = {
   },
   createServer: async (
     _,
-    { createServer: { months, price, CPU, HDD, type, RAM, bandwidth } }
+    {
+      createServer: {
+        name,
+        support,
+        information,
+        SSD,
+        timeSetup,
+        months,
+        price,
+        CPU,
+        HDD,
+        type,
+        RAM,
+        bandwidth,
+      },
+    }
   ) => {
     try {
       const server = await models.Servers.findOne({ type });
@@ -115,6 +134,11 @@ const product = {
       const resProduct = await newProduct.save();
 
       const newServer = new models.Servers({
+        name,
+        support,
+        information,
+        SSD,
+        timeSetup,
         CPU,
         HDD,
         type,
@@ -122,11 +146,9 @@ const product = {
         bandwidth,
         idProduct: resProduct._id,
       });
-      const resServer = await newServer.save();
-      console.log(resServer);
-      return {
-        ...resServer._doc,
-      };
+      await newServer.save();
+
+      return models.Servers.find();
     } catch (err) {
       console.log("Err server", err);
     }
@@ -359,6 +381,54 @@ const product = {
         }
       );
       return models.VPS.find();
+    } catch (err) {
+      console.log("Err server", err);
+    }
+  },
+  editServer: async (
+    _,
+    {
+      editServer: {
+        _id,
+        name,
+        timeSetup,
+        CPU,
+        support,
+        information,
+        months,
+        price,
+        SSD,
+        HDD,
+        type,
+        RAM,
+        bandwidth,
+      },
+    }
+  ) => {
+    try {
+      const server = await models.Servers.findOneAndUpdate(
+        { _id },
+        {
+          name,
+          timeSetup,
+          CPU,
+          support,
+          SSD,
+          HDD,
+          type,
+          RAM,
+          information,
+          bandwidth,
+        }
+      ).populate("idProduct");
+      const product = await models.Products.findOneAndUpdate(
+        { _id: server.idProduct._id },
+        {
+          months,
+          price,
+        }
+      );
+      return models.Servers.find();
     } catch (err) {
       console.log("Err server", err);
     }

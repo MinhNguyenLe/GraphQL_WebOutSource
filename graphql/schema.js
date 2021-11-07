@@ -83,13 +83,18 @@ export const typeDefs = gql`
 
   type Servers {
     _id: ID!
+    name: String!
+    information: String!
+    support: [String]!
+    timeSetup: String!
+    SSD: String!
     HDD: String!
     type: String!
     RAM: String!
     CPU: String!
     product: Products!
     bandwidth: String!
-    createdAt: String
+    createdAt: String!
   }
 
   input Register {
@@ -162,6 +167,11 @@ export const typeDefs = gql`
     months: Int!
   }
   input CreateServer {
+    information: String!
+    name: String!
+    support: [String]!
+    SSD: String!
+    timeSetup: String!
     HDD: String!
     type: String!
     RAM: String!
@@ -169,6 +179,22 @@ export const typeDefs = gql`
     CPU: String!
     price: Float!
     months: Int!
+  }
+
+  input EditServer {
+    _id: ID!
+    name: String!
+    timeSetup: String!
+    SSD: String!
+    HDD: String!
+    support: [String]!
+    CPU: String!
+    type: String!
+    RAM: String!
+    bandwidth: String!
+    price: Float!
+    months: Int!
+    information: String!
   }
   input CreateDomain {
     dot: String!
@@ -245,7 +271,9 @@ export const typeDefs = gql`
     createVPS(createVPS: CreateVPS): [VPS]!
     editVPS(editVPS: EditVPS): [VPS]!
     deleteVPS(deleteVPS: Delete): [VPS]!
-    createServer(createServer: CreateServer): Servers!
+    createServer(createServer: CreateServer): [Servers]!
+    editServer(editServer: EditServer): [Servers]!
+    deleteServer(deleteServer: Delete): [Servers]!
     createUserDomain(createUserDomain: CreateUserDomain): UserDomain!
     buyAllProduct(
       user: ID!
