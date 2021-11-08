@@ -7,6 +7,10 @@ exports.userServer = new mongoose.Schema(
       type: String,
       default: "",
     },
+    SSD: {
+      type: String,
+      default: "",
+    },
     bandwidth: {
       type: String,
       default: "",
@@ -26,6 +30,14 @@ exports.userServer = new mongoose.Schema(
     type: {
       type: String,
       default: "",
+    },
+    name: {
+      type: String,
+      default: "",
+    },
+    support: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true, collection: "UserServer" }

@@ -6,13 +6,6 @@ exports.userProduct = new mongoose.Schema(
     price: {
       type: Number,
     },
-    subPrice: {
-      type: [Object],
-    },
-    idPromotion: {
-      type: Schema.Types.ObjectId,
-      ref: "Promotions",
-    },
     type: {
       type: String,
       default: "",
@@ -23,7 +16,7 @@ exports.userProduct = new mongoose.Schema(
     },
     months: {
       type: Number,
-      default: 12,
+      default: 1,
     },
   },
   { timestamps: true, collection: "UserProduct" }

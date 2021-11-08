@@ -27,6 +27,14 @@ exports.userVPS = new mongoose.Schema(
       type: String,
       default: "",
     },
+    name: {
+      type: String,
+      default: "",
+    },
+    support: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true, collection: "UserVPS" }
 );
