@@ -209,7 +209,6 @@ export const typeDefs = gql`
     price: Float!
     months: Int!
     user: Users!
-    idPromotion: Promotions
     createdAt: String
     type: String!
   }
@@ -230,7 +229,7 @@ export const typeDefs = gql`
 
   input BuyDomain {
     nameUrl: String!
-    domain: ID!
+    _id: ID!
   }
 
   input BuyHosting {
@@ -281,9 +280,11 @@ export const typeDefs = gql`
     createUserDomain(createUserDomain: CreateUserDomain): UserDomain!
     buyAllProduct(
       user: ID!
-      domain: [BuyDomain]
-      hosting: [BuyHosting]
-    ): Buyers!
+      domain: [BuyDomain]!
+      hosting: [ID]!
+      vps: [ID]!
+      server: [ID]!
+    ): Users!
     testToken(token: Token): Message!
     cleanAllDB(token: Token): Message!
   }

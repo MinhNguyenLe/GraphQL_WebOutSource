@@ -44,13 +44,10 @@ const userProduct = {
   },
   buyAllProduct: async (
     _,
-    { user: user, domain: domain, hosting: hosting }
+    { user: idU, domain: domain, hosting: idH, vps: idV, server: idS }
   ) => {
     try {
-      // if (!domain || !user || !hosting) console.log("No input");
-      const userData = await models.Users.findById(user);
-      // let inputDomain = [],
-      //   inputHosting = [];
+      const userData = await models.Users.findById(idU);
 
       if (!userData) {
         throw new UserInputError("User wrong", {
@@ -59,22 +56,20 @@ const userProduct = {
           },
         });
       }
-      for (const item of domain) {
-        const itemX = await models.Domains.findById(item.domain).populate(
-          "idProduct"
-        );
+      for (const i of domain) {
+        const item = await models.Domains.findById(i._id).populate("idProduct");
 
         const newUserProduct = new models.UserProduct({
-          months: itemX.idProduct.months,
-          price: itemX.idProduct.price,
-          idUser: userData._id,
+          months: item.idProduct.months,
+          price: item.idProduct.price,
+          idUser: idU,
           type: "domain",
         });
         const resUserProduct = await newUserProduct.save();
         const newUserDomain = new models.UserDomain({
           idUserProduct: resUserProduct._id,
-          dot: itemX.dot,
-          nameUrl: item.nameUrl,
+          dot: item.dot,
+          nameUrl: i.nameUrl,
         });
         await newUserDomain.save();
 
@@ -82,24 +77,78 @@ const userProduct = {
         await userData.save();
       }
 
-      for (const item of hosting) {
-        const itemX = await models.Hosting.findById(item.hosting).populate(
-          "idProduct"
-        );
+      for (const i of idH) {
+        const item = await models.Hosting.findById(i).populate("idProduct");
 
         const newUserProduct = new models.UserProduct({
-          months: itemX.idProduct.months,
-          price: itemX.idProduct.price,
-          idUser: userData._id,
+          months: item.idProduct.months,
+          price: item.idProduct.price,
+          idUser: idU,
           type: "hosting",
         });
         const resUserProduct = await newUserProduct.save();
         const newUserHosting = new models.UserHosting({
           idUserProduct: resUserProduct._id,
-          RAM: itemX.RAM,
-          type: itemX.type,
-          SSDMemory: itemX.SSDMemory,
-          bandwidth: itemX.bandwidth,
+          RAM: item.RAM,
+          type: item.type,
+          SSDMemory: item.SSDMemory,
+          bandwidth: item.bandwidth,
+          website: item.website,
+          name: item.name,
+          support: item.support,
+        });
+        await newUserHosting.save();
+
+        userData.listIdProduct.push(newUserProduct._id);
+        await userData.save();
+      }
+
+      for (const i of idV) {
+        const item = await models.VPS.findById(i).populate("idProduct");
+
+        const newUserProduct = new models.UserProduct({
+          months: item.idProduct.months,
+          price: item.idProduct.price,
+          idUser: idU,
+          type: "vps",
+        });
+        const resUserProduct = await newUserProduct.save();
+        const newUserHosting = new models.UserVPS({
+          idUserProduct: resUserProduct._id,
+          RAM: item.RAM,
+          type: item.type,
+          cloudStorage: item.cloudStorage,
+          bandwidth: item.bandwidth,
+          CPU: item.CPU,
+          name: item.name,
+          support: item.support,
+        });
+        await newUserHosting.save();
+
+        userData.listIdProduct.push(newUserProduct._id);
+        await userData.save();
+      }
+
+      for (const i of idS) {
+        const item = await models.Servers.findById(i).populate("idProduct");
+
+        const newUserProduct = new models.UserProduct({
+          months: item.idProduct.months,
+          price: item.idProduct.price,
+          idUser: idU,
+          type: "server",
+        });
+        const resUserProduct = await newUserProduct.save();
+        const newUserHosting = new models.UserServer({
+          idUserProduct: resUserProduct._id,
+          RAM: item.RAM,
+          type: item.type,
+          HDD: item.HDD,
+          SSD: item.SSD,
+          bandwidth: item.bandwidth,
+          CPU: item.CPU,
+          name: item.name,
+          support: item.support,
         });
         await newUserHosting.save();
 

@@ -32,8 +32,8 @@ exports.userVPS = new mongoose.Schema(
       default: "",
     },
     support: {
-      type: String,
-      default: "",
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true, collection: "UserVPS" }
