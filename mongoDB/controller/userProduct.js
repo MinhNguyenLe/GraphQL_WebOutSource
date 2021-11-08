@@ -4,7 +4,7 @@ import * as models from "../models";
 const { UserInputError } = require("apollo-server");
 
 const userProduct = {
-  cleanAllDB: async () => {
+  cleanAllDB: async (_, { token: { token } }) => {
     // await models.Users.remove();
     // await models.Buyers.remove();
     // await models.Domains.remove();

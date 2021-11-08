@@ -285,5 +285,6 @@ export const typeDefs = gql`
       hosting: [BuyHosting]
     ): Buyers!
     testToken(token: Token): Message!
+    cleanAllDB(token: Token): Message!
   }
 `;

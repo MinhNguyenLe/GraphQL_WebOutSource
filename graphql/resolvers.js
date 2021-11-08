@@ -57,5 +57,6 @@ export const resolvers = {
     editServer: controller.product.editServer,
     deleteServer: controller.product.deleteServer,
     testToken: controller.user.testToken,
+    cleanAllDB: controller.userProduct.cleanAllDB,
   },
 };
