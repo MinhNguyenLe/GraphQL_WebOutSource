@@ -27,6 +27,11 @@ function generateToken(user) {
 }
 
 const user = {
+  testToken: async (_, { token: { token } }) => {
+    const user = jwt.verify(token, SECRET_KEY);
+    console.log(user);
+    return { mess: user.id };
+  },
   buyers: () => {
     return new Promise((resolve, reject) => {
       models.Buyers.find((err, users) => {
@@ -67,10 +72,8 @@ const user = {
       throw new UserInputError("Password incorrect", { errors });
     }
     const token = generateToken(user);
-    console.log(user);
     if (!user.isPermission) {
       const buyer = await models.Buyers.findOne({ idUser: user._id });
-      console.log(buyer);
       return {
         ...buyer._doc,
         token,
@@ -78,7 +81,6 @@ const user = {
     }
     //cheat
     const buyer = await models.Buyers.findOne({ idUser: user._id });
-    console.log(buyer);
     return {
       ...buyer._doc,
       token,

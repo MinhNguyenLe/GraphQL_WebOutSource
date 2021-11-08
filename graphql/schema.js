@@ -237,6 +237,10 @@ export const typeDefs = gql`
     hosting: ID!
   }
 
+  input Token {
+    token: String!
+  }
+
   # input BuyAllProduct {
   #   domain: [BuyDomain]!
   #   user: ID!
@@ -280,5 +284,6 @@ export const typeDefs = gql`
       domain: [BuyDomain]
       hosting: [BuyHosting]
     ): Buyers!
+    testToken(token: Token): Message!
   }
 `;

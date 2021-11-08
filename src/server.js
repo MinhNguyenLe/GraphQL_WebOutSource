@@ -5,6 +5,8 @@ import { ApolloServer } from "apollo-server-express";
 import { resolvers } from "../graphql/resolvers.js";
 import { typeDefs } from "../graphql/schema.js";
 
+const checkAuth = require("../util/check-auth");
+
 import cors from "cors";
 
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
@@ -47,6 +49,8 @@ app.post("/create-payment-intent", async (req, res) => {
 });
 
 server.applyMiddleware({ app });
+
+app.use(checkAuth);
 
 app.get("/", (req, res) => {
   console.log("Apollo GraphQL Express server is ready");
