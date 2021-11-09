@@ -2,16 +2,18 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   type Users {
+    token: String!
     _id: ID!
     email: String!
     password: String!
     userName: String!
     isPermission: Boolean!
     listIdProduct: [UserProduct]!
+    createdAt: String!
   }
 
   type Buyers {
-    token: String
+    token: String!
     _id: ID!
     user: Users!
     name: String!
@@ -205,7 +207,7 @@ export const typeDefs = gql`
     price: Float!
     months: Int!
     user: Users!
-    createdAt: String
+    createdAt: String!
     type: String!
   }
 
@@ -261,8 +263,8 @@ export const typeDefs = gql`
     mess: String!
   }
   type Mutation {
-    register(register: Register): Buyers!
-    login(login: Login): Buyers!
+    register(register: Register): Users!
+    login(login: Login): Users!
     createDomain(createDomain: CreateDomain): Domains!
     createHosting(createHosting: CreateHosting): [Hosting]!
     editHosting(editHosting: EditHosting): [Hosting]!

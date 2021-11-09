@@ -59,7 +59,9 @@ const user = {
     if (!valid) {
       throw new UserInputError("Errors", { errors });
     }
-    const user = await models.Users.findOne({ email });
+    const user = await models.Users.findOne({ email }).populate(
+      "listIdProduct"
+    );
 
     if (!user) {
       errors.general = "User not found";
@@ -72,17 +74,17 @@ const user = {
       throw new UserInputError("Password incorrect", { errors });
     }
     const token = generateToken(user);
-    if (!user.isPermission) {
-      const buyer = await models.Buyers.findOne({ idUser: user._id });
-      return {
-        ...buyer._doc,
-        token,
-      };
-    }
+    // if (!user.isPermission) {
+    //   const buyer = await models.Buyers.findOne({ idUser: user._id });
+    //   return {
+    //     ...buyer._doc,
+    //     token,
+    //   };
+    // }
     //cheat
     const buyer = await models.Buyers.findOne({ idUser: user._id });
     return {
-      ...buyer._doc,
+      ...user._doc,
       token,
     };
   },
@@ -134,11 +136,10 @@ const user = {
         contact: contact,
         quantity: quantity,
       });
-      const res = await newBuyer.save();
+      await newBuyer.save();
       const token = generateToken(resUser);
-      console.log(res);
       return {
-        ...res._doc,
+        ...resUser._doc,
         token,
       };
     } catch (err) {
