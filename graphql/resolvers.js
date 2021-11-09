@@ -41,6 +41,11 @@ export const resolvers = {
       return controller.user.userAsBuyer(buyer);
     },
   },
+  Users: {
+    listIdProduct: async (user) => {
+      return controller.user.listIdProduct(user);
+    },
+  },
   Mutation: {
     createServer: controller.product.createServer,
     createVPS: controller.product.createVPS,

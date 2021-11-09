@@ -1,7 +1,19 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+  #  user == account, buyer/admin === information user
+
   type Users {
+    _id: ID!
+    email: String!
+    password: String!
+    userName: String!
+    isPermission: Boolean!
+    listIdProduct: [UserProduct]!
+    createdAt: String!
+  }
+
+  type Account {
     token: String!
     _id: ID!
     email: String!
@@ -263,8 +275,8 @@ export const typeDefs = gql`
     mess: String!
   }
   type Mutation {
-    register(register: Register): Users!
-    login(login: Login): Users!
+    register(register: Register): Account!
+    login(login: Login): Account!
     createDomain(createDomain: CreateDomain): Domains!
     createHosting(createHosting: CreateHosting): [Hosting]!
     editHosting(editHosting: EditHosting): [Hosting]!

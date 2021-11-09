@@ -41,7 +41,7 @@ const user = {
     });
   },
   users: async () => {
-    return models.Users.find().populate("listIdProduct");
+    return models.Users.find();
   },
   userAsBuyer: async (buyer) => {
     let user = [];
@@ -54,14 +54,18 @@ const user = {
     });
     return user[0];
   },
+  listIdProduct: async (user) => {
+    const result = await models.Users.findOne({ _id: user._id }).populate(
+      "listIdProduct"
+    );
+    return result.listIdProduct;
+  },
   login: async (_, { login: { email, password } }) => {
     const { valid, errors } = validateLoginInput(email, password);
     if (!valid) {
       throw new UserInputError("Errors", { errors });
     }
-    const user = await models.Users.findOne({ email }).populate(
-      "listIdProduct"
-    );
+    const user = await models.Users.findOne({ email });
 
     if (!user) {
       errors.general = "User not found";
