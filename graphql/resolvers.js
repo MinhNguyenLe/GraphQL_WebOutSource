@@ -45,6 +45,9 @@ export const resolvers = {
     listIdProduct: async (user) => {
       return controller.user.listIdProduct(user);
     },
+    buyer: async (user) => {
+      return controller.user.getBuyer(user);
+    },
   },
   Mutation: {
     createServer: controller.product.createServer,

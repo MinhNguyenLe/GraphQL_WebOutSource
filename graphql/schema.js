@@ -10,22 +10,12 @@ export const typeDefs = gql`
     userName: String!
     isPermission: Boolean!
     listIdProduct: [UserProduct]!
+    buyer: Buyers!
     createdAt: String!
     token: String!
-  }
-
-  type Account {
-    _id: ID!
-    email: String!
-    password: String!
-    userName: String!
-    isPermission: Boolean!
-    listIdProduct: [UserProduct]!
-    createdAt: String!
   }
 
   type Buyers {
-    token: String!
     _id: ID!
     user: Users!
     name: String!

@@ -40,6 +40,9 @@ const user = {
       });
     });
   },
+  getBuyer: async (user) => {
+    return models.Buyers.findOne({ idUser: user._id });
+  },
   users: async () => {
     return models.Users.find();
   },
@@ -47,7 +50,7 @@ const user = {
     let user = [];
     const data = await models.Buyers.find({}).populate("idUser");
 
-    data.filter((item) => {
+    data.forEach((item) => {
       if (item.idUser._id.toString() == buyer.idUser.toString()) {
         user.push(item.idUser);
       }
@@ -125,15 +128,6 @@ const user = {
         // isPermission: true,
       });
       const resUser = await newUser.save();
-
-      const buyer = await models.Buyers.findOne({ email });
-      if (buyer) {
-        throw new UserInputError("Email existed", {
-          errors: {
-            userName: "Email existed",
-          },
-        });
-      }
 
       const newBuyer = new models.Buyers({
         idUser: resUser._id,
