@@ -11,10 +11,10 @@ export const typeDefs = gql`
     isPermission: Boolean!
     listIdProduct: [UserProduct]!
     createdAt: String!
+    token: String!
   }
 
   type Account {
-    token: String!
     _id: ID!
     email: String!
     password: String!
@@ -275,8 +275,8 @@ export const typeDefs = gql`
     mess: String!
   }
   type Mutation {
-    register(register: Register): Account!
-    login(login: Login): Account!
+    register(register: Register): Users!
+    login(login: Login): Users!
     createDomain(createDomain: CreateDomain): Domains!
     createHosting(createHosting: CreateHosting): [Hosting]!
     editHosting(editHosting: EditHosting): [Hosting]!
