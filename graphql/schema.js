@@ -2,28 +2,24 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   type Users {
-    _id: ID
+    _id: ID!
     email: String!
     password: String!
-    job: String
-    fullName: String
     userName: String!
-    isPermission: Boolean
-    phone: String
-    information: String
-    # buyer: [Buyers]
-    listIdProduct: [UserProduct]
+    isPermission: Boolean!
+    listIdProduct: [UserProduct]!
   }
 
   type Buyers {
     token: String
     _id: ID!
     user: Users!
-    typeBuyer: Int!
-    listIdProduct: [UserProduct]
     name: String!
-    createdAt: String
+    type: String!
+    information: String!
+    contact: String!
     quantity: Int!
+    createdAt: String!
   }
 
   type Promotions {
@@ -101,7 +97,7 @@ export const typeDefs = gql`
     email: String!
     password: String!
     userName: String!
-    name: String!
+    contact: String!
     quantity: Int!
   }
 

@@ -3,7 +3,7 @@ module.exports.validateRegisterInput = (
   email,
   password,
   quantity,
-  name
+  contact
   // confirmPassword
 ) => {
   const errors = {};
@@ -23,10 +23,10 @@ module.exports.validateRegisterInput = (
     errors.password = "Password must not empty";
   }
   if (quantity === "") {
-    errors.password = "quantity must not empty";
+    errors.quantity = "quantity must not empty";
   }
-  if (name === "") {
-    errors.password = "name must not empty";
+  if (contact === "") {
+    errors.contact = "contact must not empty";
   }
   // else if (password !== confirmPassword) {
   //   errors.confirmPassword = "Passwords must match";

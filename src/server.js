@@ -50,7 +50,7 @@ app.post("/create-payment-intent", async (req, res) => {
 
 server.applyMiddleware({ app });
 
-app.use(checkAuth);
+// app.use(checkAuth);
 
 app.get("/", (req, res) => {
   console.log("Apollo GraphQL Express server is ready");

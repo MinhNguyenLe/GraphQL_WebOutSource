@@ -88,14 +88,14 @@ const user = {
   },
   register: async (
     _,
-    { register: { userName, email, password, quantity, name } }
+    { register: { userName, email, password, quantity, contact } }
   ) => {
     const { valid, errors } = validateRegisterInput(
       userName,
       email,
       password,
       quantity,
-      name
+      contact
     );
     if (!valid) {
       throw new UserInputError("Errors", { errors });
@@ -120,20 +120,19 @@ const user = {
       });
       const resUser = await newUser.save();
 
-      const buyer = await models.Buyers.findOne({ name });
+      const buyer = await models.Buyers.findOne({ email });
       if (buyer) {
-        throw new UserInputError("Name existed", {
+        throw new UserInputError("Email existed", {
           errors: {
-            userName: "Name existed",
+            userName: "Email existed",
           },
         });
       }
 
       const newBuyer = new models.Buyers({
         idUser: resUser._id,
-        name: name,
+        contact: contact,
         quantity: quantity,
-        typeBuyer: quantity < 11 ? 1 : 2,
       });
       const res = await newBuyer.save();
       const token = generateToken(resUser);

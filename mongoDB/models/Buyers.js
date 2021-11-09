@@ -7,10 +7,22 @@ exports.buyerSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "Users",
     },
-    typeBuyer: {
-      type: Number, // 1 :team (small) 2 :business (lard)
-    },
+    //nameBusiness
     name: {
+      type: String,
+      default: "",
+    },
+    //typeBusiness
+    type: {
+      type: String,
+      default: "",
+    },
+    //informationBusiness
+    information: {
+      type: String,
+      default: "",
+    },
+    contact: {
       type: String,
       default: "",
     },

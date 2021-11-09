@@ -9,28 +9,12 @@ exports.userSchema = new mongoose.Schema(
     password: {
       type: String,
     },
-    job: {
-      type: String,
-      default: "",
-    },
-    fullName: {
-      type: String,
-      default: "",
-    },
     userName: {
       type: String,
     },
     isPermission: {
       type: Boolean,
       default: false,
-    },
-    phone: {
-      type: String,
-      default: "",
-    },
-    information: {
-      type: String,
-      default: "",
     },
     listIdProduct: {
       type: [{ type: Schema.Types.ObjectId, ref: "UserProduct" }],
