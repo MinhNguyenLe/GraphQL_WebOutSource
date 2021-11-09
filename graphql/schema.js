@@ -220,6 +220,43 @@ export const typeDefs = gql`
     userProduct: UserProduct!
   }
 
+  type UserHosting {
+    _id: ID!
+    SSDMemory: String!
+    type: String!
+    RAM: String!
+    bandwidth: String!
+    website: String!
+    name: String!
+    support: [String]!
+    userProduct: UserProduct!
+  }
+
+  type UserVPS {
+    _id: ID!
+    cloudStorage: String!
+    CPU: String!
+    RAM: String!
+    bandwidth: String!
+    type: String!
+    name: String!
+    support: [String]!
+    userProduct: UserProduct!
+  }
+
+  type UserServer {
+    _id: ID!
+    HDD: String!
+    CPU: String!
+    SSD: String!
+    RAM: String!
+    bandwidth: String!
+    type: String!
+    name: String!
+    support: [String]!
+    userProduct: UserProduct!
+  }
+
   input CreateUserDomain {
     domain: ID!
     product: ID!
@@ -260,6 +297,10 @@ export const typeDefs = gql`
     vps: [VPS]
     servers: [Servers]
     userDomain: [UserDomain]
+    userHosting: [UserHosting]
+    userVPS: [UserVPS]
+    userServer: [UserServer]
+    userProduct: [UserProduct]
   }
   type Message {
     mess: String!

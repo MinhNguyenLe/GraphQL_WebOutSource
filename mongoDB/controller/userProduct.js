@@ -15,6 +15,8 @@ const userProduct = {
     // await models.UserProduct.remove();
     // await models.UserDomain.remove();
     // await models.UserHosting.remove();
+    // await models.UserVPS.remove();
+    // await models.UserServer.remove();
 
     return {
       mess: "clear all DB successful",
@@ -30,12 +32,98 @@ const userProduct = {
       });
     });
   },
-  userProduct: async (userDomain) => {
+  userHosting: () => {
+    return new Promise((resolve, reject) => {
+      models.UserHosting.find((err, userHosting) => {
+        if (err) reject(err);
+        else {
+          resolve(userHosting);
+        }
+      });
+    });
+  },
+  userVPS: () => {
+    return new Promise((resolve, reject) => {
+      models.UserVPS.find((err, userVPS) => {
+        if (err) reject(err);
+        else {
+          resolve(userVPS);
+        }
+      });
+    });
+  },
+  userServer: () => {
+    return new Promise((resolve, reject) => {
+      models.UserServer.find((err, userServer) => {
+        if (err) reject(err);
+        else {
+          resolve(userServer);
+        }
+      });
+    });
+  },
+  userProduct: () => {
+    return new Promise((resolve, reject) => {
+      models.UserProduct.find((err, userProduct) => {
+        if (err) reject(err);
+        else {
+          resolve(userProduct);
+        }
+      });
+    });
+  },
+  userProductU: async (product) => {
+    let user = [];
+    const data = await models.UserProduct.find({}).populate("idUser");
+    data.forEach((item) => {
+      if (item.idUser._id.toString() == product.idUser.toString()) {
+        user.push(item.idUser);
+      }
+    });
+    return user[0];
+  },
+  userProductD: async (product) => {
     let userProduct = [];
     const data = await models.UserDomain.find({}).populate("idUserProduct");
-    data.filter((item) => {
+    data.forEach((item) => {
       if (
-        item.idUserProduct._id.toString() == userDomain.idUserProduct.toString()
+        item.idUserProduct._id.toString() == product.idUserProduct.toString()
+      ) {
+        userProduct.push(item.idUserProduct);
+      }
+    });
+    return userProduct[0];
+  },
+  userProductH: async (product) => {
+    let userProduct = [];
+    const data = await models.UserHosting.find({}).populate("idUserProduct");
+    data.forEach((item) => {
+      if (
+        item.idUserProduct._id.toString() == product.idUserProduct.toString()
+      ) {
+        userProduct.push(item.idUserProduct);
+      }
+    });
+    return userProduct[0];
+  },
+  userProductV: async (product) => {
+    let userProduct = [];
+    const data = await models.UserVPS.find({}).populate("idUserProduct");
+    data.forEach((item) => {
+      if (
+        item.idUserProduct._id.toString() == product.idUserProduct.toString()
+      ) {
+        userProduct.push(item.idUserProduct);
+      }
+    });
+    return userProduct[0];
+  },
+  userProductS: async (product) => {
+    let userProduct = [];
+    const data = await models.UserServer.find({}).populate("idUserProduct");
+    data.forEach((item) => {
+      if (
+        item.idUserProduct._id.toString() == product.idUserProduct.toString()
       ) {
         userProduct.push(item.idUserProduct);
       }

@@ -10,10 +10,34 @@ export const resolvers = {
     vps: controller.product.vps,
     servers: controller.product.servers,
     userDomain: controller.userProduct.userDomain,
+    userHosting: controller.userProduct.userHosting,
+    userVPS: controller.userProduct.userVPS,
+    userServer: controller.userProduct.userServer,
+    userProduct: controller.userProduct.userProduct,
+  },
+  UserProduct: {
+    user: async (product) => {
+      return controller.userProduct.userProductU(product);
+    },
   },
   UserDomain: {
-    userProduct: async (userDomain) => {
-      return controller.userProduct.userProduct(userDomain);
+    userProduct: async (product) => {
+      return controller.userProduct.userProductD(product);
+    },
+  },
+  UserHosting: {
+    userProduct: async (product) => {
+      return controller.userProduct.userProductH(product);
+    },
+  },
+  UserVPS: {
+    userProduct: async (product) => {
+      return controller.userProduct.userProductV(product);
+    },
+  },
+  UserServer: {
+    userProduct: async (product) => {
+      return controller.userProduct.userProductS(product);
     },
   },
   VPS: {
