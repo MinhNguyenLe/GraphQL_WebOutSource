@@ -90,5 +90,9 @@ export const resolvers = {
     deleteServer: controller.product.deleteServer,
     testToken: controller.user.testToken,
     cleanAllDB: controller.userProduct.cleanAllDB,
+    getUserDomainBuyer: controller.userProduct.getUserDomainBuyer,
+    getUserHostingBuyer: controller.userProduct.getUserHostingBuyer,
+    getUserVPSBuyer: controller.userProduct.getUserVPSBuyer,
+    getUserServerBuyer: controller.userProduct.getUserServerBuyer,
   },
 };

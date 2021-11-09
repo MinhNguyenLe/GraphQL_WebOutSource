@@ -1,3 +1,4 @@
+import { ResumeToken } from "mongodb";
 import { Mongoose } from "mongoose";
 import * as models from "../models";
 
@@ -129,6 +130,68 @@ const userProduct = {
       }
     });
     return userProduct[0];
+  },
+  getUserDomainBuyer: async (_, { id: idBuyer }) => {
+    const userDomain = await models.UserDomain.find({}).populate(
+      "idUserProduct"
+    );
+    let result = [];
+    userDomain.forEach((item) => {
+      if (item.idUserProduct.idUser.toString() === idBuyer) result.push(item);
+    });
+
+    if (!result.length) {
+      console.log("No Domain");
+      return;
+    }
+
+    return result;
+  },
+  getUserHostingBuyer: async (_, { id: idBuyer }) => {
+    const userHosting = await models.UserHosting.find({}).populate(
+      "idUserProduct"
+    );
+    let result = [];
+    userHosting.forEach((item) => {
+      if (item.idUserProduct.idUser.toString() === idBuyer) result.push(item);
+    });
+
+    if (!result.length) {
+      console.log("No Domain");
+      return;
+    }
+
+    return result;
+  },
+  getUserVPSBuyer: async (_, { id: idBuyer }) => {
+    const userVPS = await models.UserVPS.find({}).populate("idUserProduct");
+    let result = [];
+    userVPS.forEach((item) => {
+      if (item.idUserProduct.idUser.toString() === idBuyer) result.push(item);
+    });
+
+    if (!result.length) {
+      console.log("No Domain");
+      return;
+    }
+
+    return result;
+  },
+  getUserServerBuyer: async (_, { id: idBuyer }) => {
+    const userServer = await models.UserServer.find({}).populate(
+      "idUserProduct"
+    );
+    let result = [];
+    userServer.forEach((item) => {
+      if (item.idUserProduct.idUser.toString() === idBuyer) result.push(item);
+    });
+
+    if (!result.length) {
+      console.log("No Domain");
+      return;
+    }
+
+    return result;
   },
   buyAllProduct: async (
     _,

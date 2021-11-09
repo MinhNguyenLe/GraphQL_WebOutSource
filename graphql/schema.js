@@ -217,7 +217,7 @@ export const typeDefs = gql`
     _id: ID!
     dot: String!
     nameUrl: String!
-    userProduct: UserProduct!
+    userProduct: UserProduct
   }
 
   type UserHosting {
@@ -230,6 +230,48 @@ export const typeDefs = gql`
     name: String!
     support: [String]!
     userProduct: UserProduct!
+  }
+
+  type schemaUserDomain {
+    _id: ID!
+    dot: String!
+    nameUrl: String!
+    idUserProduct: UserProduct!
+  }
+  type schemaUserHosting {
+    _id: ID!
+    SSDMemory: String!
+    type: String!
+    RAM: String!
+    bandwidth: String!
+    website: String!
+    name: String!
+    support: [String]!
+    idUserProduct: UserProduct!
+  }
+  type schemaUserVPS {
+    _id: ID!
+    cloudStorage: String!
+    CPU: String!
+    RAM: String!
+    bandwidth: String!
+    type: String!
+    name: String!
+    support: [String]!
+    idUserProduct: UserProduct!
+  }
+
+  type schemaUserServer {
+    _id: ID!
+    HDD: String!
+    CPU: String!
+    SSD: String!
+    RAM: String!
+    bandwidth: String!
+    type: String!
+    name: String!
+    support: [String]!
+    idUserProduct: UserProduct!
   }
 
   type UserVPS {
@@ -328,5 +370,9 @@ export const typeDefs = gql`
     ): Users!
     testToken(token: Token): Message!
     cleanAllDB(token: Token): Message!
+    getUserDomainBuyer(id: ID!): [schemaUserDomain]!
+    getUserHostingBuyer(id: ID!): [schemaUserHosting]!
+    getUserVPSBuyer(id: ID!): [schemaUserVPS]!
+    getUserServerBuyer(id: ID!): [schemaUserServer]!
   }
 `;
