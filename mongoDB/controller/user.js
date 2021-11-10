@@ -144,6 +144,16 @@ const user = {
       console.log("Err server", err);
     }
   },
+  uploadAvatar: async (_, { id: _id, image: image }) => {
+    const user = await models.Users.findOne({ _id });
+    user.avatar = image;
+    return user.save();
+  },
+  uploadBackground: async (_, { id: _id, image: image }) => {
+    const user = await models.Users.findOne({ _id });
+    user.background = image;
+    return user.save();
+  },
 };
 
 module.exports = user;

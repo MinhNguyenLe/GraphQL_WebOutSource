@@ -5,12 +5,23 @@ exports.userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
+      default: "",
     },
     password: {
       type: String,
+      default: "",
     },
     userName: {
       type: String,
+      default: "",
+    },
+    avatar: {
+      type: String,
+      default: "",
+    },
+    background: {
+      type: String,
+      default: "",
     },
     isPermission: {
       type: Boolean,

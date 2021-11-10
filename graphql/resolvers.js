@@ -94,5 +94,7 @@ export const resolvers = {
     getUserHostingBuyer: controller.userProduct.getUserHostingBuyer,
     getUserVPSBuyer: controller.userProduct.getUserVPSBuyer,
     getUserServerBuyer: controller.userProduct.getUserServerBuyer,
+    uploadAvatar: controller.user.uploadAvatar,
+    uploadBackground: controller.user.uploadBackground,
   },
 };

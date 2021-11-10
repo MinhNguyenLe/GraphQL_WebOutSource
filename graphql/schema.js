@@ -13,6 +13,8 @@ export const typeDefs = gql`
     buyer: Buyers!
     createdAt: String!
     token: String!
+    avatar: String!
+    background: String!
   }
 
   type Buyers {
@@ -374,5 +376,7 @@ export const typeDefs = gql`
     getUserHostingBuyer(id: ID!): [schemaUserHosting]!
     getUserVPSBuyer(id: ID!): [schemaUserVPS]!
     getUserServerBuyer(id: ID!): [schemaUserServer]!
+    uploadAvatar(id: ID!, image: String!): Users!
+    uploadBackground(id: ID!, image: String!): Users!
   }
 `;
